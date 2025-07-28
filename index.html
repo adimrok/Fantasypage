@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smooth Animated Leaderboard with Arrows</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f0f0;
+      padding: 40px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .leaderboard-container {
+      width: 420px;
+      margin: 0 auto 20px auto;
+      position: relative;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 12px 16px;
+      width: 100%;
+      height: 60px;
+      position: absolute;
+      transition: transform 0.8s ease-in-out;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .name {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .score {
+      font-size: 18px;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+
+    .arrow {
+      font-size: 16px;
+      margin-left: 6px;
+    }
+
+    .highlight {
+      background-color: #e3fcef !important;
+    }
+
+    #restart {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #restart:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div style="display: flex; justify-content: center; align-items: center; gap: 0;">
+  <!-- First logo -->
+  <img 
+    src="https://stfc365.sharepoint.com/:i:/r/sites/EstatesSystemsandDataManagement/Shared%20Documents/1.WIP/Test%20Area/Avatars/logo.png?csf=1&web=1&e=4NZ5Wx" 
+    alt="Logo 1" 
+    style="height: 80px; margin-bottom: 10px;"
+  >
+
+  <!-- Spacer div with same width as logo -->
+  <div style="width: 80px;"></div>
+
+  <!-- Second logo -->
+  <img 
+    src="https://th.bing.com/th/id/R.b3cc3f6c657b9401b9d43f15f7e2af2a?rik=qbHV5JR11GbRDA&riu=http%3a%2f%2fwww.ncfsc.co.uk%2fwp-content%2fuploads%2f2023%2f06%2fFantasyPremierLeague16x9.png&ehk=u%2fv%2b1SrOg2URnMyx%2bLbiN3Llje1KTc%2bswpOPquJJgL8%3d&risl=&pid=ImgRaw&r=0" 
+    alt="Logo 2" 
+    style="height: 80px; margin-bottom: 10px;"
+  >
+</div>
+
+<!-- Title -->
+<h2 style="font-size: 22px; margin-top: 10px;">
+  Estates Dream Teams Fantasy Premier League 2025/2026 Table
+</h2>
+
+<div class="leaderboard-container" id="leaderboard">
+  <div class="row" data-name="Sophie">
+    <div class="name"><img class="avatar" src="https://stfc365.sharepoint.com/:i:/r/sites/EstatesSystemsandDataManagement/Shared%20Documents/1.WIP/Test%20Area/Avatars/SC.png?csf=1&web=1&e=RG7kZB"> Sophie <span class="arrow">⟷</span></div>
+    <div class="score">0</div>
+  </div>
+  <div class="row" data-name="Dion">
+    <div class="name"><img class="avatar" src="https://stfc365.sharepoint.com/:i:/r/sites/EstatesSystemsandDataManagement/Shared%20Documents/1.WIP/Test%20Area/Avatars/DW.png?csf=1&web=1&e=lK9ST1"> Dion <span class="arrow">⟷</span></div>
+    <div class="score">0</div>
+  </div>
+  <div class="row" data-name="Patrick">
+    <div class="name"><img class="avatar" src="https://stfc365.sharepoint.com/:i:/r/sites/EstatesSystemsandDataManagement/Shared%20Documents/1.WIP/Test%20Area/Avatars/PT.png?csf=1&web=1&e=zWnPHY"> Patrick <span class="arrow">⟷</span></div>
+    <div class="score">0</div>
+  </div>
+  <div class="row" data-name="Adrian">
+    <div class="name"><img class="avatar" src="https://stfc365.sharepoint.com/:i:/r/sites/EstatesSystemsandDataManagement/Shared%20Documents/1.WIP/Test%20Area/Avatars/AMr.png?csf=1&web=1&e=y1QgVt"> Adrian <span class="arrow">⟷</span></div>
+    <div class="score">0</div>
+  </div>
+</div>
+
+<button id="restart" onclick="restart()">🔄 Restart</button>
+
+<script>
+  const rowHeight = 80;
+  const container = document.getElementById('leaderboard');
+
+  function getPlayers() {
+    return Array.from(container.querySelectorAll('.row'));
+  }
+
+  function updateContainerHeight() {
+    const totalRows = getPlayers().length;
+    container.style.height = `${totalRows * rowHeight}px`;
+  }
+
+  // Initial data setup
+  const initialScores = {
+    Sophie: 0,
+    Dion: 0,
+    Patrick: 0,
+    Adrian: 0
+  };
+
+  const rounds = [
+    { ...initialScores },
+    { ...initialScores },
+// For Gameweek 1 change code here
+    { Sophie: 0, Dion: 0, Patrick: 0, Adrian: 0 }
+  ];
+
+  let currentRound = 0;
+  let prevPositions = {};
+
+  function layoutInitialPositions() {
+    const players = getPlayers();
+    updateContainerHeight();
+
+    players.forEach((el, idx) => {
+      el.style.transform = `translateY(${idx * rowHeight}px)`;
+      const name = el.getAttribute("data-name");
+      prevPositions[name] = idx;
+    });
+  }
+
+  function animateRound(scoreMap) {
+    const sorted = Object.entries(scoreMap)
+      .sort(([, a], [, b]) => b - a)
+      .map(([name, score]) => ({ name, score }));
+
+    const newPositions = {};
+    sorted.forEach((player, idx) => {
+      const row = container.querySelector(`.row[data-name="${player.name}"]`);
+      const scoreDiv = row.querySelector('.score');
+      const arrow = row.querySelector('.arrow');
+      const oldScore = parseInt(scoreDiv.textContent);
+
+      if (oldScore !== player.score) {
+        scoreDiv.textContent = player.score;
+        row.classList.add('highlight');
+        setTimeout(() => row.classList.remove('highlight'), 1000);
+      }
+
+      row.style.transform = `translateY(${idx * rowHeight}px)`;
+
+      const prev = prevPositions[player.name];
+      if (prev > idx) {
+        arrow.textContent = '⬆️';
+      } else if (prev < idx) {
+        arrow.textContent = '⬇️';
+      } else {
+        arrow.textContent = '⟷';
+      }
+
+      newPositions[player.name] = idx;
+    });
+
+    prevPositions = newPositions;
+  }
+
+  function nextRound() {
+    if (currentRound >= rounds.length) return;
+    animateRound(rounds[currentRound]);
+    currentRound++;
+    timer = setTimeout(nextRound, 3000);
+  }
+
+  function restart() {
+    clearTimeout(timer);
+    currentRound = 0;
+
+    const players = getPlayers();
+    Object.entries(initialScores).forEach(([name, score], idx) => {
+      const row = container.querySelector(`.row[data-name="${name}"]`);
+      row.querySelector('.score').textContent = score;
+      row.querySelector('.arrow').textContent = '⟷';
+      row.style.transform = `translateY(${idx * rowHeight}px)`;
+      prevPositions[name] = idx;
+    });
+
+    timer = setTimeout(nextRound, 2000);
+  }
+
+  // ✅ Use this function to add new rounds dynamically:
+  function addRound(scoreMap) {
+    rounds.push(scoreMap);
+    // Automatically play it if all previous rounds have finished
+    if (currentRound === rounds.length - 1) {
+      nextRound();
+    }
+  }
+
+  // ✅ WHEN YOU NEED TO ADD A NEW ROUND, use this format below:
+  // addRound({ Sophie: 3, Dion: 1, Patrick: 4, Adrian: 2 });
+  //
+  // You can paste that line into your browser DevTools console, or
+  // hardcode it here if you're preparing rounds in advance.
+  //
+  // Example for Gameweek 5:
+  // addRound({ Sophie: 7, Dion: 4, Patrick: 6, Adrian: 3 });
+
+  updateContainerHeight();
+  layoutInitialPositions();
+  let timer = setTimeout(nextRound, 2000);
+</script>
+
+</body>
+</html>
