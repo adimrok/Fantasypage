@@ -108,22 +108,21 @@
 </h2>
 
 <div class="leaderboard-container" id="leaderboard">
-  <div class="row" data-name="Sophie">
-    <div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/refs/heads/main/SC.png"> Sophie <span class="arrow">⟷</span></div>
-    <div class="score">0</div>
-  </div>
-  <div class="row" data-name="Dion">
-    <div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/refs/heads/main/DW.png"> Dion <span class="arrow">⟷</span></div>
-    <div class="score">0</div>
-  </div>
-  <div class="row" data-name="Patrick">
-    <div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/refs/heads/main/PT.png"> Patrick <span class="arrow">⟷</span></div>
-    <div class="score">0</div>
-  </div>
-  <div class="row" data-name="Adrian">
-    <div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/refs/heads/main/AMr.png"> Adrian <span class="arrow">⟷</span></div>
-    <div class="score">0</div>
-  </div>
+  <!-- Original and new people added -->
+  <!-- Each row includes a unique avatar -->
+  <div class="row" data-name="Sophie"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/SC.png"> Sophie <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Dion"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/DW.png"> Dion <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Patrick"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/PT.png"> Patrick <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Adrian"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/AMr.png"> Adrian <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Clair"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/ck.png"> Clair <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Carly L"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/cl.png"> Carly L <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Claire P"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/cp.png"> Claire P <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Dave C"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/dc.png"> Dave C <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Gemma"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/gc.png"> Gemma <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Harry"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/hh.png"> Harry <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Michelle"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/ms.png"> Michelle <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Stuart B"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/sbx.png"> Stuart B <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Sarah B"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/seb.png"> Sarah B <span class="arrow">⟷</span></div><div class="score">0</div></div>
 </div>
 
 <button id="restart" onclick="restart()">🔄 Restart</button>
@@ -143,17 +142,16 @@
 
   // Initial data setup
   const initialScores = {
-    Sophie: 0,
-    Dion: 0,
-    Patrick: 0,
-    Adrian: 0
+    Sophie: 0, Dion: 0, Patrick: 0, Adrian: 0, Clair: 0, "Carly L": 0,
+    "Claire P": 0, "Dave C": 0, Gemma: 0, Harry: 0, Michelle: 0,
+    "Stuart B": 0, "Sarah B": 0
   };
 
+  // For Gameweek 1 change scores here
   const rounds = [
     { ...initialScores },
     { ...initialScores },
-// For Gameweek 1 change code here
-    { Sophie: 0, Dion: 0, Patrick: 0, Adrian: 0 }
+    { Sophie: 0, Dion: 0, Patrick: 0, Adrian: 0, Clair: 0, "Carly L": 0, "Claire P": 0, "Dave C": 0, Gemma: 0, Harry: 0, Michelle: 0, "Stuart B": 0, "Sarah B": 0 }
   ];
 
   let currentRound = 0;
@@ -238,10 +236,7 @@
   }
 
   // ✅ WHEN YOU NEED TO ADD A NEW ROUND, use this format below:
-  // addRound({ Sophie: 3, Dion: 1, Patrick: 4, Adrian: 2 });
-  //
-  // You can paste that line into your browser DevTools console, or
-  // hardcode it here if you're preparing rounds in advance.
+  //  addRound({ Sophie: 3, Dion: 1, Patrick: 4, Adrian: 2, Clair: 5, CarlyL: 6, ClaireP: 7, DaveC: 8, Gemma: 9, Harry: 10, Michelle: 11, StuartB: 12, SarahB: 13 });
   //
   // Example for Gameweek 5:
   // addRound({ Sophie: 7, Dion: 4, Patrick: 6, Adrian: 3 });
