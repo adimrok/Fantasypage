@@ -258,8 +258,10 @@
     }
   }
 
-  let timer;
-  fetchFPLData();
+let timer;
+layoutInitialPositions(); // Set up positions right away
+fetchFPLData();           // Then wait for scores and animate
+
 </script>
 
 
