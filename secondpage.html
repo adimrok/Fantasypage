@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Estates Dream Teams Table 25/26</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f0f0;
+      padding: 40px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .leaderboard-container {
+      width: 420px;
+      margin: 0 auto 20px auto;
+      position: relative;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 12px 16px;
+      width: 100%;
+      height: 60px;
+      position: absolute;
+      transition: transform 0.8s ease-in-out;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .name {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .score {
+      font-size: 18px;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+
+    .arrow {
+      font-size: 16px;
+      margin-left: 6px;
+    }
+
+    .highlight {
+      background-color: #e3fcef !important;
+    }
+
+    #restart {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #restart:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div style="display: flex; justify-content: center; align-items: center; gap: 0;">
+  <!-- First logo -->
+  <img 
+    src="https://raw.githubusercontent.com/adimrok/Fantasypage/refs/heads/main/logo.png" 
+    alt="Logo 1" 
+    style="height: 80px; margin-bottom: 10px;"
+  >
+
+  <!-- Spacer div with same width as logo -->
+  <div style="width: 80px;"></div>
+
+  <!-- Second logo -->
+  <img 
+    src="https://th.bing.com/th/id/R.b3cc3f6c657b9401b9d43f15f7e2af2a?rik=qbHV5JR11GbRDA&riu=http%3a%2f%2fwww.ncfsc.co.uk%2fwp-content%2fuploads%2f2023%2f06%2fFantasyPremierLeague16x9.png&ehk=u%2fv%2b1SrOg2URnMyx%2bLbiN3Llje1KTc%2bswpOPquJJgL8%3d&risl=&pid=ImgRaw&r=0" 
+    alt="Logo 2" 
+    style="height: 80px; margin-bottom: 10px;"
+  >
+</div>
+
+<!-- Title -->
+<h2 style="font-size: 22px; margin-top: 10px;">
+  Estates Dream Teams Fantasy Premier League 2025/2026 Table
+</h2>
+
+<div class="leaderboard-container" id="leaderboard">
+  <!-- Original and new people added -->
+  <!-- Each row includes a unique avatar -->
+  <div class="row" data-name="Sophie"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/SC.png"> Sophie <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Dion"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/DW.png"> Dion <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Patrick"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/PT.png"> Patrick <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Adrian"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/AMr.png"> Adrian <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Clair"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/ck.png"> Clair <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Carly L"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/cl.png"> Carly L <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Claire P"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/cp.png"> Claire P <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Dave C"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/dc.png"> Dave C <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Gemma"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/gc.png"> Gemma <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Harry"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/hh.png"> Harry <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Michelle"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/ms.png"> Michelle <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Stuart B"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/sbx.png"> Stuart B <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Sarah B"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/seb.png"> Sarah B <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Phil S"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/phs.png"> Phil S <span class="arrow">⟷</span></div><div class="score">0</div></div>
+</div>
+
+<button id="restart" onclick="restart()">🔄 Restart</button>
+
+<script>
+  const rowHeight = 80;
+  const container = document.getElementById('leaderboard');
+  const scriptEndpoint = "https://script.google.com/macros/s/AKfycbw2U_Yv709AQzor5N3pwSPTn54NT5K-phRtrfaH6IT_6h1Ntq1NLvyedILzcEwAY0WIIQ/exec";
+
+  const managerToDisplay = {
+    "Adrian Mroczkowski": "Adrian",
+    "Claire Phillips": "Claire P",
+    "David Clements": "Dave C",
+    "michelle shirley": "Michelle",
+    "Clair Kavaney": "Clair",
+    "Phill Smith": "Phil S",
+    "Gemma Corney": "Gemma",
+    "Carly Lewis": "Carly L",
+    "Harry Hanks": "Harry",
+    "STUART BUXTON": "Stuart B",
+    "Sarah Brooks": "Sarah B",
+    "Dion Wedderburn": "Dion",
+    "Sophie Caddick": "Sophie",
+    "Patrick Towoju": "Patrick",
+  };
+
+  let prevPositions = {};
+  let allRounds = [];
+  let currentRound = 0;
+
+  function getPlayers() {
+    return Array.from(container.querySelectorAll('.row'));
+  }
+
+  function updateContainerHeight() {
+    container.style.height = `${getPlayers().length * rowHeight}px`;
+  }
+
+  function layoutInitialPositions() {
+    const players = getPlayers();
+    updateContainerHeight();
+    players.forEach((el, idx) => {
+      el.style.transform = `translateY(${idx * rowHeight}px)`;
+      prevPositions[el.dataset.name] = idx;
+    });
+  }
+
+  function animateRound(scoreMap) {
+    const sorted = Object.entries(scoreMap)
+      .sort(([, a], [, b]) => b - a)
+      .map(([name, score]) => ({ name, score }));
+
+    const newPositions = {};
+    sorted.forEach((player, idx) => {
+      const row = container.querySelector(`.row[data-name="${player.name}"]`);
+      if (!row) return;
+      const scoreDiv = row.querySelector('.score');
+      const arrow = row.querySelector('.arrow');
+      const oldScore = parseInt(scoreDiv.textContent);
+
+      if (oldScore !== player.score) {
+        scoreDiv.textContent = player.score;
+        row.classList.add('highlight');
+        setTimeout(() => row.classList.remove('highlight'), 1000);
+      }
+
+      row.style.transform = `translateY(${idx * rowHeight}px)`;
+
+      const prev = prevPositions[player.name];
+      arrow.textContent = prev > idx ? '⬆️' : prev < idx ? '⬇️' : '⟷';
+      newPositions[player.name] = idx;
+    });
+
+    prevPositions = newPositions;
+  }
+
+  function nextRound() {
+    if (currentRound >= allRounds.length) return;
+    animateRound(allRounds[currentRound]);
+    currentRound++;
+    timer = setTimeout(nextRound, 3000);
+  }
+
+  function restart() {
+    clearTimeout(timer);
+    currentRound = 0;
+    const players = getPlayers();
+    players.forEach((row, idx) => {
+      const name = row.getAttribute("data-name");
+      row.querySelector('.score').textContent = 0;
+      row.querySelector('.arrow').textContent = '⟷';
+      row.style.transform = `translateY(${idx * rowHeight}px)`;
+      prevPositions[name] = idx;
+    });
+    timer = setTimeout(nextRound, 200);
+  }
+
+  function calculateWeeklyRounds(data) {
+    const history = {}; // managerDisplayName => [gw1, gw2, ...]
+    data.forEach(({ manager_name, gw, total_points }) => {
+      const display = managerToDisplay[manager_name];
+      if (!display) return;
+      if (!history[display]) history[display] = [];
+      history[display][gw - 1] = total_points;
+    });
+
+    const maxRounds = Math.max(...Object.values(history).map(a => a.length));
+    const rounds = [];
+
+    for (let i = 0; i < maxRounds; i++) {
+      const round = {};
+      for (const name in history) {
+        round[name] = history[name][i] ?? (rounds[i - 1]?.[name] ?? 0);
+      }
+      rounds.push(round);
+    }
+
+    return rounds;
+  }
+
+  async function fetchFPLData() {
+    try {
+      const res = await fetch(scriptEndpoint);
+      const data = await res.json(); // Format: [{ manager_name, gw, total_points }]
+      allRounds = calculateWeeklyRounds(data);
+      layoutInitialPositions();
+      timer = setTimeout(nextRound, 200);
+    } catch (err) {
+      console.error("Error fetching FPL data:", err);
+    }
+  }
+
+  let timer;
+  fetchFPLData();
+</script>
+
+
+</body>
+</html>
