@@ -131,23 +131,24 @@
 <script>
   const rowHeight = 80;
   const container = document.getElementById('leaderboard');
-  const scriptEndpoint = "https://script.google.com/macros/s/AKfycbw2U_Yv709AQzor5N3pwSPTn54NT5K-phRtrfaH6IT_6h1Ntq1NLvyedILzcEwAY0WIIQ/exec";
+  const scriptEndpoint = "https://script.google.com/macros/s/AKfycbzgnTd-mUlzr25D34XqofHDjxAjbudG7f-XVjFZOpz61BsEN-RRijP1e5UZejG5LXqLpA/exec";
 
+  // Mapping full names from FPL API to display names on leaderboard
   const managerToDisplay = {
-    "Adrian Mroczkowski": "Adrian",
-    "Claire Phillips": "Claire P",
-    "David Clements": "Dave C",
+    "adrian mroczkowski": "Adrian",
+    "claire phillips": "Claire P",
+    "david clements": "Dave C",
     "michelle shirley": "Michelle",
-    "Clair Kavaney": "Clair",
-    "Phill Smith": "Phil S",
-    "Gemma Corney": "Gemma",
-    "Carly Lewis": "Carly L",
-    "Harry Hanks": "Harry",
-    "STUART BUXTON": "Stuart B",
-    "Sarah Brooks": "Sarah B",
-    "Dion Wedderburn": "Dion",
-    "Sophie Caddick": "Sophie",
-    "Patrick Towoju": "Patrick",
+    "clair kavaney": "Clair",
+    "phill smith": "Phil S",
+    "gemma corney": "Gemma",
+    "carly lewis": "Carly L",
+    "harry hanks": "Harry",
+    "stuart buxton": "Stuart B",
+    "sarah brooks": "Sarah B",
+    "dion wedderburn": "Dion",
+    "sophie caddick": "Sophie",
+    "patrick towoju": "Patrick" // just in case for future
   };
 
   let prevPositions = {};
@@ -191,7 +192,6 @@
       }
 
       row.style.transform = `translateY(${idx * rowHeight}px)`;
-
       const prev = prevPositions[player.name];
       arrow.textContent = prev > idx ? '⬆️' : prev < idx ? '⬇️' : '⟷';
       newPositions[player.name] = idx;
@@ -221,10 +221,12 @@
     timer = setTimeout(nextRound, 200);
   }
 
+  // Helper to calculate cumulative scores round-by-round
   function calculateWeeklyRounds(data) {
-    const history = {}; // managerDisplayName => [gw1, gw2, ...]
+    const history = {}; // displayName => [gw1, gw2, ...]
+
     data.forEach(({ manager_name, gw, total_points }) => {
-      const display = managerToDisplay[manager_name];
+      const display = managerToDisplay[manager_name.toLowerCase()];
       if (!display) return;
       if (!history[display]) history[display] = [];
       history[display][gw - 1] = total_points;
@@ -247,7 +249,7 @@
   async function fetchFPLData() {
     try {
       const res = await fetch(scriptEndpoint);
-      const data = await res.json(); // Format: [{ manager_name, gw, total_points }]
+      const data = await res.json(); // Expected format: [{ manager_name, gw, total_points }]
       allRounds = calculateWeeklyRounds(data);
       layoutInitialPositions();
       timer = setTimeout(nextRound, 200);
