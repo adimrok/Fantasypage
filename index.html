@@ -112,7 +112,7 @@
   <!-- Each row includes a unique avatar -->
   <div class="row" data-name="Sophie"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/SC.png"> Sophie <span class="arrow">⟷</span></div><div class="score">0</div></div>
   <div class="row" data-name="Dion"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/DW.png"> Dion <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Patrick"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/PT.png"> Patrick <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Patrick T"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/PT.png"> Patrick T <span class="arrow">⟷</span></div><div class="score">0</div></div>
   <div class="row" data-name="Adrian"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/AMr.png"> Adrian <span class="arrow">⟷</span></div><div class="score">0</div></div>
   <div class="row" data-name="Clair"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/ck.png"> Clair <span class="arrow">⟷</span></div><div class="score">0</div></div>
   <div class="row" data-name="Carly L"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/cl.png"> Carly L <span class="arrow">⟷</span></div><div class="score">0</div></div>
@@ -125,7 +125,7 @@
   <div class="row" data-name="Sarah B"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/seb.png"> Sarah B <span class="arrow">⟷</span></div><div class="score">0</div></div>
   <div class="row" data-name="Phill"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/ps.png"> Phill <span class="arrow">⟷</span></div><div class="score">0</div></div>
   <div class="row" data-name="Ian"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/iw.png"> Ian <span class="arrow">⟷</span></div><div class="score">0</div></div>
-
+  <div class="row" data-name="Patrick W"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/pw.png"> Patrick W <span class="arrow">⟷</span></div><div class="score">0</div></div>
 </div>
 
 <button id="restart" onclick="restart()">🔄 Restart</button>
@@ -145,16 +145,16 @@
 
   // Initial data setup
   const initialScores = {
-    Sophie: 0, Dion: 0, Patrick: 0, Adrian: 0, Clair: 0, "Carly L": 0,
+    Sophie: 0, Dion: 0, "Patrick T": 0, Adrian: 0, Clair: 0, "Carly L": 0,
     "Claire P": 0, "Dave C": 0, Gemma: 0, Harry: 0, Michelle: 0,
-    "Stuart B": 0, "Sarah B": 0, "Phill": 0, "Ian": 0
+    "Stuart B": 0, "Sarah B": 0, Phill: 0, Ian: 0, "Patrick W": 0
   };
 
   // For Gameweek 1 change scores here
   const rounds = [
     { ...initialScores },
     //GW1
-    //{ Sophie: 1, Dion: 2, Patrick: 0, Adrian: 4, Clair: 0, "Carly L": 0, "Claire P": 5, "Dave C": 0, Gemma: 0, Harry: 0, Michelle: 0, "Stuart B": 0, "Sarah B": 0, "Phill": 0, "Ian": 0 },
+    //{ Sophie: 1, Dion: 2, Patrick: 0, Adrian: 4, Clair: 0, "Carly L": 0, "Claire P": 5, "Dave C": 0, Gemma: 0, Harry: 0, Michelle: 0, "Stuart B": 0, "Sarah B": 0, Phill: 0, Ian: 0, "Patrick W": 0},
     //etc
   ];
 
