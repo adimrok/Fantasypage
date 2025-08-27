@@ -112,7 +112,7 @@
   <!-- Each row includes a unique avatar -->
   <div class="row" data-name="Sophie"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/SC.png"> Sophie <span class="arrow">⟷</span></div><div class="score">0</div></div>
   <div class="row" data-name="Dion"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/DW.png"> Dion <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Patrick"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/PT.png"> Patrick <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Patrick T"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/PT.png"> Patrick T <span class="arrow">⟷</span></div><div class="score">0</div></div>
   <div class="row" data-name="Adrian"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/AMr.png"> Adrian <span class="arrow">⟷</span></div><div class="score">0</div></div>
   <div class="row" data-name="Clair"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/ck.png"> Clair <span class="arrow">⟷</span></div><div class="score">0</div></div>
   <div class="row" data-name="Carly L"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/cl.png"> Carly L <span class="arrow">⟷</span></div><div class="score">0</div></div>
@@ -123,7 +123,18 @@
   <div class="row" data-name="Michelle"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/ms.png"> Michelle <span class="arrow">⟷</span></div><div class="score">0</div></div>
   <div class="row" data-name="Stuart B"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/sbx.png"> Stuart B <span class="arrow">⟷</span></div><div class="score">0</div></div>
   <div class="row" data-name="Sarah B"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/seb.png"> Sarah B <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Phill S"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/phs.png"> Phill S <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Phill"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/ps.png"> Phill <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Ian"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/iw.png"> Ian <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Patrick W"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/pw.png"> Patrick W <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Suyash"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/sup.png"> Suyash <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Ben"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/BL.png"> Ben <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Gideon"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/GS.png"> Gideon <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Lee S"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/LS.png"> Lee S <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Mike"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/MMC.png"> Mike <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Conor"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/cb.png"> Conor <span class="arrow">⟷</span></div><div class="score">0</div></div>
+  <div class="row" data-name="Stephen"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/ss.png"> Stephen <span class="arrow">⟷</span></div><div class="score">0</div></div>
+
+
 </div>
 
 <button id="restart" onclick="restart()">🔄 Restart</button>
@@ -135,21 +146,31 @@
 
   // Mapping full names from FPL API to display names on leaderboard
   const managerToDisplay = {
-    "adrian mroczkowski": "Adrian",
-    "claire phillips": "Claire P",
-    "david clements": "Dave C",
-    "michelle shirley": "Michelle",
-    "clair kavaney": "Clair",
-    "phil smith": "Phill S",
-    "gemma corney": "Gemma",
-    "carly lewis": "Carly L",
-    "harry hanks": "Harry",
-    "stuart buxton": "Stuart B",
-    "sarah brooks": "Sarah B",
-    "dion wedderburn": "Dion",
-    "sophie caddick": "Sophie",
-    "patrick towoju": "Patrick" // just in case for future
-  };
+  "Sophie Caddick": "Sophie",
+  "Dion Wedderburn": "Dion",
+  "Patrick Towoju": "Patrick T",
+  "Adrian Mroczkowski": "Adrian",
+  "Clair Kavaney": "Clair",
+  "Carly Lewis": "Carly L",
+  "Claire Phillips": "Claire P",
+  "David Clements": "Dave C",
+  "Gemma Corney": "Gemma",
+  "Harry Hanks": "Harry",
+  "michelle shirley": "Michelle",
+  "STUART BUXTON": "Stuart B",
+  "Sarah Brooks": "Sarah B",
+  "Phill Smith": "Phill",
+  "Ian Wooster": "Ian",
+  "Patrick Wehmeier": "Patrick W",
+  "Suyash Pandit": "Suyash",
+  "Ben Lewis": "Ben",
+  "Gideon Spratt": "Gideon",
+  "Lee Stone": "Lee S",
+  "Mike McCabe": "Mike",
+  "Conor Barry": "Conor",
+  "Stephen Shipston": "Stephen"
+};
+
 
   let prevPositions = {};
   let allRounds = [];
