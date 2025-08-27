@@ -164,7 +164,7 @@
 const rounds = [
   { ...initialScores },
 
-  // GW1 (from API gw_points)
+  // GW1 (raw gw_points from API)
   {
     Sophie: 55,
     Dion: 47,
@@ -191,35 +191,34 @@ const rounds = [
     Stephen: 55
   },
 
-  // GW2 (from API gw_points)
+  // GW2 (cumulative = GW1 + GW2)
   {
-    Sophie: 49,
-    Dion: 70,
-    "Patrick T": 51,
-    Adrian: 43,
-    Clair: 49,
-    "Carly L": 50,
-    "Claire P": 51,
-    "Dave C": 35,
-    Gemma: 59,
-    Harry: 67,
-    Michelle: 39,
-    "Stuart B": 55,
-    "Sarah B": 38,
-    Phill: 50,
-    Ian: 51,
-    "Patrick W": 34,
-    Suyash: 40,
-    Ben: 35,
-    Gideon: 39,
-    "Lee S": 45,
-    Mike: 67,
-    Conor: 61,
-    Stephen: 45
+    Sophie: 104,     // 55 + 49
+    Dion: 117,       // 47 + 70
+    "Patrick T": 105,// 54 + 51
+    Adrian: 78,      // 35 + 43
+    Clair: 100,      // 51 + 49
+    "Carly L": 115,  // 65 + 50
+    "Claire P": 114, // 63 + 51
+    "Dave C": 67,    // 32 + 35
+    Gemma: 119,      // 60 + 59
+    Harry: 106,      // 39 + 67
+    Michelle: 90,    // 51 + 39
+    "Stuart B": 142, // 87 + 55
+    "Sarah B": 81,   // 43 + 38
+    Phill: 91,       // 41 + 50
+    Ian: 77,         // 26 + 51
+    "Patrick W": 86, // 52 + 34
+    Suyash: 87,      // 47 + 40
+    Ben: 85,         // 50 + 35
+    Gideon: 83,      // 44 + 39
+    "Lee S": 96,     // 51 + 45
+    Mike: 92,        // 25 + 67
+    Conor: 130,      // 69 + 61
+    Stephen: 100     // 55 + 45
   }
-
-  // add more rounds as needed
 ];
+
 
 
   let currentRound = 0;
