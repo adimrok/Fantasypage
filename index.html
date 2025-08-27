@@ -161,12 +161,66 @@
   };
 
   // For Gameweek 1 change scores here
-  const rounds = [
-    { ...initialScores },
-    //GW1
-    //{ Sophie: 1, Dion: 2, Patrick: 0, Adrian: 4, Clair: 0, "Carly L": 0, "Claire P": 5, "Dave C": 0, Gemma: 0, Harry: 0, Michelle: 0, "Stuart B": 0, "Sarah B": 0, Phill: 0, Ian: 0, "Patrick W": 0, Suyash: 0, Ben: 0, Gideon: 0, "Lee S": 0, Mike: 0, Conor: 0, Stephen: 0},
-    //etc
-  ];
+const rounds = [
+  { ...initialScores },
+
+  // GW1 (from API gw_points)
+  {
+    Sophie: 55,
+    Dion: 47,
+    "Patrick T": 54,
+    Adrian: 35,
+    Clair: 51,
+    "Carly L": 65,
+    "Claire P": 63,
+    "Dave C": 32,
+    Gemma: 60,
+    Harry: 39,
+    Michelle: 51,
+    "Stuart B": 87,
+    "Sarah B": 43,
+    Phill: 41,
+    Ian: 26,
+    "Patrick W": 52,
+    Suyash: 47,
+    Ben: 50,
+    Gideon: 44,
+    "Lee S": 51,
+    Mike: 25,
+    Conor: 69,
+    Stephen: 55
+  },
+
+  // GW2 (from API gw_points)
+  {
+    Sophie: 49,
+    Dion: 70,
+    "Patrick T": 51,
+    Adrian: 43,
+    Clair: 49,
+    "Carly L": 50,
+    "Claire P": 51,
+    "Dave C": 35,
+    Gemma: 59,
+    Harry: 67,
+    Michelle: 39,
+    "Stuart B": 55,
+    "Sarah B": 38,
+    Phill: 50,
+    Ian: 51,
+    "Patrick W": 34,
+    Suyash: 40,
+    Ben: 35,
+    Gideon: 39,
+    "Lee S": 45,
+    Mike: 67,
+    Conor: 61,
+    Stephen: 45
+  }
+
+  // add more rounds as needed
+];
+
 
   let currentRound = 0;
   let prevPositions = {};
