@@ -1,0 +1,39 @@
+name: Update FPL season data
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/build-season-data.mjs"
+      - ".github/workflows/update-season-data.yml"
+  schedule:
+    - cron: "20 8 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-season-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Download latest FPL data
+        run: node scripts/build-season-data.mjs
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/season-2025-26.json
+          git diff --cached --quiet || git commit -m "Update FPL season data"
+          git push

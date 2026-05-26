@@ -2,338 +2,785 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Estates Dream Teams Table 25/26</title>
+  <link rel="icon" href="logo.png">
   <style>
+    :root {
+      --ink: #15141f;
+      --muted: #6a6575;
+      --panel: #ffffff;
+      --line: #ded9e8;
+      --purple: #37003c;
+      --green: #00ff87;
+      --blue: #04f5ff;
+      --gold: #ffb000;
+      --red: #e02f5f;
+      --bg: #f7f4f8;
+      --row-step: 84px;
+      --row-height: 74px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f0f0;
-      padding: 40px;
-      text-align: center;
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(55, 0, 60, 0.08), rgba(247, 244, 248, 0) 300px),
+        var(--bg);
     }
 
-    h2 {
-      margin-bottom: 20px;
+    button,
+    select,
+    input {
+      font: inherit;
     }
 
-    .leaderboard-container {
-      width: 420px;
-      margin: 0 auto 20px auto;
+    .shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 44px;
+    }
+
+    .masthead {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 0 22px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 62px;
+      height: 62px;
+      object-fit: contain;
+      flex: 0 0 auto;
+    }
+
+    .brand-kicker {
+      margin: 0 0 3px;
+      color: var(--purple);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.45rem, 2.5vw, 2.45rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .season-badge {
+      justify-self: end;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 40px;
+      padding: 0 14px;
+      border: 1px solid rgba(55, 0, 60, 0.18);
+      border-radius: 8px;
+      color: var(--purple);
+      background: rgba(255, 255, 255, 0.76);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .season-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 0 4px rgba(0, 255, 135, 0.18);
+    }
+
+    .summary-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 4px 0 18px;
+    }
+
+    .summary-item {
+      min-height: 72px;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .summary-label {
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .summary-value {
+      margin: 0;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 1.2rem;
+      font-weight: 850;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 18px 42px rgba(28, 17, 38, 0.08);
+    }
+
+    .button-group {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .icon-button {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--purple);
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .icon-button:hover {
+      border-color: rgba(55, 0, 60, 0.34);
+      background: #faf8fb;
+      transform: translateY(-1px);
+    }
+
+    .icon-button:disabled {
+      cursor: default;
+      opacity: 0.45;
+      transform: none;
+    }
+
+    .icon-button.primary {
+      border-color: var(--purple);
+      background: var(--purple);
+      color: #fff;
+    }
+
+    .round-select {
+      justify-self: start;
+      min-width: 138px;
+      height: 42px;
+      padding: 0 34px 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 750;
+    }
+
+    .speed-control {
+      display: grid;
+      grid-template-columns: auto 140px;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 750;
+    }
+
+    .speed-control input {
+      width: 140px;
+      accent-color: var(--purple);
+    }
+
+    .board-head {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr) 80px 92px 74px;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0 8px;
+      padding: 0 18px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .leaderboard {
       position: relative;
+      min-height: var(--row-height);
     }
 
     .row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #ffffff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      border-radius: 8px;
-      padding: 12px 16px;
-      width: 100%;
-      height: 60px;
       position: absolute;
-      transition: transform 0.8s ease-in-out;
+      left: 0;
+      top: 0;
+      width: 100%;
+      min-height: var(--row-height);
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr) 80px 92px 74px;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border: 1px solid rgba(222, 217, 232, 0.94);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 10px 28px rgba(28, 17, 38, 0.08);
+      transition: transform 720ms cubic-bezier(0.2, 0.8, 0.2, 1), background 260ms ease, border-color 260ms ease;
+      will-change: transform;
+    }
+
+    .row.is-leader {
+      border-color: rgba(0, 255, 135, 0.72);
+      box-shadow: 0 12px 30px rgba(0, 255, 135, 0.12);
+    }
+
+    .row.is-updated {
+      background: #e9fff5;
+    }
+
+    .position {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--purple);
+      font-weight: 900;
+    }
+
+    .player {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      gap: 12px;
     }
 
     .avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      margin-right: 10px;
-      vertical-align: middle;
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      object-fit: cover;
+      flex: 0 0 auto;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px rgba(55, 0, 60, 0.18);
+      background: #efe9f1;
     }
 
-    .name {
-      display: flex;
+    .player-copy {
+      min-width: 0;
+    }
+
+    .player-name {
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 1rem;
+      font-weight: 850;
+    }
+
+    .team-name {
+      margin: 2px 0 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--muted);
+      font-size: 0.83rem;
+      font-weight: 600;
+    }
+
+    .movement {
+      justify-self: start;
+      display: inline-flex;
       align-items: center;
-      font-size: 16px;
-      font-weight: 500;
+      justify-content: center;
+      min-width: 58px;
+      min-height: 30px;
+      padding: 0 9px;
+      border-radius: 999px;
+      background: #f0edf4;
+      color: var(--muted);
+      font-weight: 900;
     }
 
-    .score {
-      font-size: 18px;
-      font-weight: bold;
-      margin-left: 10px;
+    .movement.up {
+      background: rgba(0, 255, 135, 0.18);
+      color: #007a42;
     }
 
-    .arrow {
-      font-size: 16px;
-      margin-left: 6px;
+    .movement.down {
+      background: rgba(224, 47, 95, 0.12);
+      color: var(--red);
     }
 
-    .highlight {
-      background-color: #e3fcef !important;
+    .gw-points,
+    .total-points {
+      justify-self: end;
+      font-variant-numeric: tabular-nums;
+      font-weight: 900;
     }
 
-    #restart {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
+    .gw-points {
+      color: var(--purple);
     }
 
-    #restart:hover {
-      background: #0056b3;
+    .total-points {
+      font-size: 1.18rem;
+    }
+
+    .message {
+      margin: 18px 0 0;
+      padding: 14px 16px;
+      border: 1px solid rgba(224, 47, 95, 0.22);
+      border-radius: 8px;
+      background: rgba(224, 47, 95, 0.08);
+      color: #7d1634;
+      font-weight: 700;
+    }
+
+    .is-hidden {
+      display: none;
+    }
+
+    @media (max-width: 780px) {
+      :root {
+        --row-step: 96px;
+        --row-height: 86px;
+      }
+
+      .shell {
+        width: min(100% - 20px, 1120px);
+        padding-top: 14px;
+      }
+
+      .masthead {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .season-badge {
+        justify-self: start;
+      }
+
+      .summary-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .round-select,
+      .speed-control {
+        justify-self: stretch;
+      }
+
+      .speed-control {
+        grid-template-columns: auto 1fr;
+      }
+
+      .speed-control input {
+        width: 100%;
+      }
+
+      .board-head {
+        grid-template-columns: 42px minmax(0, 1fr) 60px 62px;
+        padding: 0 10px;
+      }
+
+      .board-head span:nth-child(3) {
+        display: none;
+      }
+
+      .row {
+        grid-template-columns: 42px minmax(0, 1fr) 60px 62px;
+        padding: 10px;
+      }
+
+      .movement {
+        display: none;
+      }
+
+      .avatar {
+        width: 42px;
+        height: 42px;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .summary-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .brand-logo {
+        width: 54px;
+        height: 54px;
+      }
+
+      .button-group {
+        justify-content: space-between;
+      }
+
+      .icon-button {
+        width: 40px;
+      }
     }
   </style>
 </head>
 <body>
+  <main class="shell">
+    <header class="masthead">
+      <div class="brand-lockup">
+        <img class="brand-logo" src="logo.png" alt="Estates Dream Teams logo">
+        <div>
+          <p class="brand-kicker">Fantasy Premier League</p>
+          <h1>Estates Dream Teams Table</h1>
+        </div>
+      </div>
+      <div></div>
+      <div class="season-badge"><span class="season-dot"></span><span id="seasonLabel">2025/26</span></div>
+    </header>
 
-<div style="display: flex; justify-content: center; align-items: center; gap: 0;">
-  <!-- First logo -->
-  <img 
-    src="https://raw.githubusercontent.com/adimrok/Fantasypage/refs/heads/main/logo.png" 
-    alt="Logo 1" 
-    style="height: 80px; margin-bottom: 10px;"
-  >
+    <section class="summary-strip" aria-label="Round summary">
+      <div class="summary-item">
+        <p class="summary-label">Round</p>
+        <p class="summary-value" id="roundLabel">Loading</p>
+      </div>
+      <div class="summary-item">
+        <p class="summary-label">Leader</p>
+        <p class="summary-value" id="leaderLabel">-</p>
+      </div>
+      <div class="summary-item">
+        <p class="summary-label">League GW Points</p>
+        <p class="summary-value" id="roundTotalLabel">-</p>
+      </div>
+      <div class="summary-item">
+        <p class="summary-label">Updated</p>
+        <p class="summary-value" id="updatedLabel">-</p>
+      </div>
+    </section>
 
-  <!-- Spacer div with same width as logo -->
-  <div style="width: 80px;"></div>
+    <section class="toolbar" aria-label="Table controls">
+      <div class="button-group">
+        <button class="icon-button" type="button" id="restartButton" title="Restart" aria-label="Restart">&#8634;</button>
+        <button class="icon-button" type="button" id="previousButton" title="Previous gameweek" aria-label="Previous gameweek">&#8249;</button>
+        <button class="icon-button primary" type="button" id="playButton" title="Play or pause" aria-label="Play or pause">&#9658;</button>
+        <button class="icon-button" type="button" id="nextButton" title="Next gameweek" aria-label="Next gameweek">&#8250;</button>
+      </div>
 
-  <!-- Second logo -->
-  <img 
-    src="https://th.bing.com/th/id/R.b3cc3f6c657b9401b9d43f15f7e2af2a?rik=qbHV5JR11GbRDA&riu=http%3a%2f%2fwww.ncfsc.co.uk%2fwp-content%2fuploads%2f2023%2f06%2fFantasyPremierLeague16x9.png&ehk=u%2fv%2b1SrOg2URnMyx%2bLbiN3Llje1KTc%2bswpOPquJJgL8%3d&risl=&pid=ImgRaw&r=0" 
-    alt="Logo 2" 
-    style="height: 80px; margin-bottom: 10px;"
-  >
-</div>
+      <select class="round-select" id="roundSelect" aria-label="Choose gameweek"></select>
 
-<!-- Title -->
-<h2 style="font-size: 22px; margin-top: 10px;">
-  Estates Dream Teams Fantasy Premier League 2025/2026 Table
-</h2>
+      <label class="speed-control">
+        <span>Speed</span>
+        <input id="speedControl" type="range" min="700" max="2600" step="100" value="1500" aria-label="Animation speed">
+      </label>
+    </section>
 
-<div class="leaderboard-container" id="leaderboard">
-  <!-- Original and new people added -->
-  <!-- Each row includes a unique avatar -->
-  <div class="row" data-name="Sophie"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/SC.png"> Sophie <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Dion"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/DW.png"> Dion <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Patrick T"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/PT.png"> Patrick T <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Adrian"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/AMr.png"> Adrian <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Clair"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/ck.png"> Clair <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Carly L"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/cl.png"> Carly L <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Claire P"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/cp.png"> Claire P <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Dave C"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/dc.png"> Dave C <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Gemma"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/gc.png"> Gemma <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Harry"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/hh.png"> Harry <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Michelle"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/ms.png"> Michelle <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Stuart B"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/sbx.png"> Stuart B <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Sarah B"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/seb.png"> Sarah B <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Phill"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/ps.png"> Phill <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Ian"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/iw.png"> Ian <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Patrick W"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/pw.png"> Patrick W <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Suyash"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/sup.png"> Suyash <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Ben"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/BL.png"> Ben <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Gideon"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/GS.png"> Gideon <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Lee S"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/LS.png"> Lee S <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Mike"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/MMC.png"> Mike <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Conor"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/cb.png"> Conor <span class="arrow">⟷</span></div><div class="score">0</div></div>
-  <div class="row" data-name="Stephen"><div class="name"><img class="avatar" src="https://raw.githubusercontent.com/adimrok/Fantasypage/main/ss.png"> Stephen <span class="arrow">⟷</span></div><div class="score">0</div></div>
+    <div class="board-head" aria-hidden="true">
+      <span>Pos</span>
+      <span>Player</span>
+      <span>Move</span>
+      <span>GW</span>
+      <span>Total</span>
+    </div>
 
+    <section class="leaderboard" id="leaderboard" aria-label="Animated league table"></section>
+    <div class="message is-hidden" id="message" role="status"></div>
+  </main>
 
-</div>
+  <script>
+    const DATA_URL = "data/season-2025-26.json";
 
-<button id="restart" onclick="restart()">🔄 Restart</button>
+    const elements = {
+      leaderboard: document.getElementById("leaderboard"),
+      roundLabel: document.getElementById("roundLabel"),
+      leaderLabel: document.getElementById("leaderLabel"),
+      roundTotalLabel: document.getElementById("roundTotalLabel"),
+      updatedLabel: document.getElementById("updatedLabel"),
+      seasonLabel: document.getElementById("seasonLabel"),
+      roundSelect: document.getElementById("roundSelect"),
+      restartButton: document.getElementById("restartButton"),
+      previousButton: document.getElementById("previousButton"),
+      playButton: document.getElementById("playButton"),
+      nextButton: document.getElementById("nextButton"),
+      speedControl: document.getElementById("speedControl"),
+      message: document.getElementById("message")
+    };
 
-<script>
-  const rowHeight = 80;
-  const container = document.getElementById('leaderboard');
+    let database;
+    let currentRoundIndex = -1;
+    let timer;
+    let isPlaying = false;
 
-  function getPlayers() {
-    return Array.from(container.querySelectorAll('.row'));
-  }
-
-  function updateContainerHeight() {
-    const totalRows = getPlayers().length;
-    container.style.height = `${totalRows * rowHeight}px`;
-  }
-
-  // Initial data setup
-  const initialScores = {
-    Sophie: 0, Dion: 0, "Patrick T": 0, Adrian: 0, Clair: 0, "Carly L": 0,
-    "Claire P": 0, "Dave C": 0, Gemma: 0, Harry: 0, Michelle: 0,
-    "Stuart B": 0, "Sarah B": 0, Phill: 0, Ian: 0, "Patrick W": 0, Suyash: 0, Ben: 0, Gideon: 0,
-    "Lee S": 0, Mike: 0, Conor: 0, Stephen: 0
-  };
-
-  // For Gameweek 1 change scores here
-const rounds = [
-  { ...initialScores },
-
-  // GW1 (raw gw_points from API)
-  {
-    Sophie: 55,
-    Dion: 47,
-    "Patrick T": 54,
-    Adrian: 35,
-    Clair: 51,
-    "Carly L": 65,
-    "Claire P": 63,
-    "Dave C": 32,
-    Gemma: 60,
-    Harry: 39,
-    Michelle: 51,
-    "Stuart B": 87,
-    "Sarah B": 43,
-    Phill: 41,
-    Ian: 26,
-    "Patrick W": 52,
-    Suyash: 47,
-    Ben: 50,
-    Gideon: 44,
-    "Lee S": 51,
-    Mike: 25,
-    Conor: 69,
-    Stephen: 55
-  },
-
-  // GW2 (cumulative = GW1 + GW2)
-  {
-    Sophie: 104,      // matches table
-    Dion: 117,        // matches table
-    "Patrick T": 105, // matches table
-    Adrian: 78,       // matches table
-    Clair: 100,       // matches table
-    "Carly L": 115,   // matches table
-    "Claire P": 106,  // corrected from 114 → 106
-    "Dave C": 63,     // corrected from 67 → 63
-    Gemma: 119,       // matches table
-    Harry: 106,       // matches table
-    Michelle: 82,     // corrected from 90 → 82
-    "Stuart B": 142,  // matches table
-    "Sarah B": 57,    // corrected from 81 → 57
-    Phill: 91,        // matches table
-    Ian: 77,          // matches table
-    "Patrick W": 86,  // matches table
-    Suyash: 87,       // matches table
-    Ben: 85,          // matches table
-    Gideon: 83,       // matches table
-    "Lee S": 96,      // matches table
-    Mike: 84,         // corrected from 92 → 84
-    Conor: 130,       // matches table
-    Stephen: 76       // corrected from 100 → 76
-},
-
-  {
-  Sophie: 161,
-  Dion: 163,
-  "Patrick T": 150,
-  Adrian: 119,
-  Clair: 132,
-  "Carly L": 161,
-  "Claire P": 141,
-  "Dave C": 99,
-  Gemma: 178,
-  Harry: 147,
-  Michelle: 139,
-  "Stuart B": 186,
-  "Sarah B": 95,
-  Phill: 132,
-  Ian: 120,
-  "Patrick W": 136,
-  Suyash: 127,
-  Ben: 146,
-  Gideon: 127,
-  "Lee S": 146,
-  Mike: 124,
-  Conor: 170,
-  Stephen: 112
-}
-
-];
-
-
-
-  let currentRound = 0;
-  let prevPositions = {};
-
-  function layoutInitialPositions() {
-    const players = getPlayers();
-    updateContainerHeight();
-
-    players.forEach((el, idx) => {
-      el.style.transform = `translateY(${idx * rowHeight}px)`;
-      const name = el.getAttribute("data-name");
-      prevPositions[name] = idx;
-    });
-  }
-
-  function animateRound(scoreMap) {
-    const sorted = Object.entries(scoreMap)
-      .sort(([, a], [, b]) => b - a)
-      .map(([name, score]) => ({ name, score }));
-
-    const newPositions = {};
-    sorted.forEach((player, idx) => {
-      const row = container.querySelector(`.row[data-name="${player.name}"]`);
-      const scoreDiv = row.querySelector('.score');
-      const arrow = row.querySelector('.arrow');
-      const oldScore = parseInt(scoreDiv.textContent);
-
-      if (oldScore !== player.score) {
-        scoreDiv.textContent = player.score;
-        row.classList.add('highlight');
-        setTimeout(() => row.classList.remove('highlight'), 1000);
-      }
-
-      row.style.transform = `translateY(${idx * rowHeight}px)`;
-
-      const prev = prevPositions[player.name];
-      if (prev > idx) {
-        arrow.textContent = '⬆️';
-      } else if (prev < idx) {
-        arrow.textContent = '⬇️';
-      } else {
-        arrow.textContent = '⟷';
-      }
-
-      newPositions[player.name] = idx;
-    });
-
-    prevPositions = newPositions;
-  }
-
-  function nextRound() {
-    if (currentRound >= rounds.length) return;
-    animateRound(rounds[currentRound]);
-    currentRound++;
-    timer = setTimeout(nextRound, 3000);
-  }
-
-  function restart() {
-    clearTimeout(timer);
-    currentRound = 0;
-
-    const players = getPlayers();
-    Object.entries(initialScores).forEach(([name, score], idx) => {
-      const row = container.querySelector(`.row[data-name="${name}"]`);
-      row.querySelector('.score').textContent = score;
-      row.querySelector('.arrow').textContent = '⟷';
-      row.style.transform = `translateY(${idx * rowHeight}px)`;
-      prevPositions[name] = idx;
-    });
-
-    timer = setTimeout(nextRound, 200);
-  }
-
-  // ✅ Use this function to add new rounds dynamically:
-  function addRound(scoreMap) {
-    rounds.push(scoreMap);
-    // Automatically play it if all previous rounds have finished
-    if (currentRound === rounds.length - 1) {
-      nextRound();
+    function getRowStep() {
+      return parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--row-step")) || 84;
     }
-  }
 
+    function formatNumber(value) {
+      return new Intl.NumberFormat("en-GB").format(value || 0);
+    }
 
-  updateContainerHeight();
-  layoutInitialPositions();
-  let timer = setTimeout(nextRound, 200);
-</script>
+    function formatDate(value) {
+      if (!value) return "-";
+      return new Intl.DateTimeFormat("en-GB", {
+        day: "2-digit",
+        month: "short",
+        hour: "2-digit",
+        minute: "2-digit"
+      }).format(new Date(value));
+    }
 
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (character) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      })[character]);
+    }
+
+    function createInitialRound() {
+      return {
+        shortName: "Start",
+        totalRoundPoints: 0,
+        standings: database.players.map((player, index) => ({
+          entry: player.entry,
+          displayName: player.displayName,
+          managerName: player.managerName,
+          teamName: player.teamName,
+          points: 0,
+          total: 0,
+          position: index + 1,
+          previousPosition: index + 1,
+          movement: 0
+        }))
+      };
+    }
+
+    function getPlayer(entry) {
+      return database.players.find((player) => player.entry === entry) || {};
+    }
+
+    function rowTemplate(player) {
+      const avatar = player.avatar || "logo.png";
+
+      return `
+        <article class="row" id="entry-${player.entry}" aria-label="${escapeHtml(player.displayName)}">
+          <div class="position">-</div>
+          <div class="player">
+            <img class="avatar" src="${avatar}" alt="">
+            <div class="player-copy">
+              <p class="player-name">${escapeHtml(player.displayName)}</p>
+              <p class="team-name">${escapeHtml(player.teamName)}</p>
+            </div>
+          </div>
+          <div class="movement">-</div>
+          <div class="gw-points">0</div>
+          <div class="total-points">0</div>
+        </article>
+      `;
+    }
+
+    function renderRows() {
+      elements.leaderboard.innerHTML = database.players.map(rowTemplate).join("");
+      elements.leaderboard.style.height = `${database.players.length * getRowStep()}px`;
+    }
+
+    function renderRoundOptions() {
+      elements.roundSelect.innerHTML = database.rounds
+        .map((round, index) => `<option value="${index}">${round.shortName}</option>`)
+        .join("");
+    }
+
+    function getRoundForDisplay(index) {
+      return index < 0 ? createInitialRound() : database.rounds[index];
+    }
+
+    function movementText(movement) {
+      if (movement > 0) return `\u2191${movement}`;
+      if (movement < 0) return `\u2193${Math.abs(movement)}`;
+      return "\u2194";
+    }
+
+    function updateSummary(round) {
+      const leader = round.standings[0];
+      const leaderProfile = leader ? getPlayer(leader.entry) : null;
+      elements.roundLabel.textContent = currentRoundIndex < 0 ? "Start" : round.shortName;
+      elements.leaderLabel.textContent = leader ? `${leaderProfile.displayName} (${formatNumber(leader.total)})` : "-";
+      elements.roundTotalLabel.textContent = formatNumber(round.totalRoundPoints);
+      elements.updatedLabel.textContent = formatDate(database.generatedAt);
+      elements.seasonLabel.textContent = database.season;
+    }
+
+    function applyRound(index) {
+      currentRoundIndex = index;
+      const round = getRoundForDisplay(index);
+      const rowStep = getRowStep();
+
+      elements.leaderboard.style.height = `${round.standings.length * rowStep}px`;
+
+      round.standings.forEach((player, rowIndex) => {
+        const row = document.getElementById(`entry-${player.entry}`);
+        if (!row) return;
+
+        const previousTotal = Number(row.dataset.total || 0);
+        row.dataset.total = player.total;
+        row.style.transform = `translateY(${rowIndex * rowStep}px)`;
+        row.classList.toggle("is-leader", rowIndex === 0);
+
+        row.querySelector(".position").textContent = player.position;
+        row.querySelector(".gw-points").textContent = formatNumber(player.points);
+        row.querySelector(".total-points").textContent = formatNumber(player.total);
+
+        const movement = row.querySelector(".movement");
+        movement.textContent = movementText(player.movement);
+        movement.classList.toggle("up", player.movement > 0);
+        movement.classList.toggle("down", player.movement < 0);
+
+        if (previousTotal !== player.total && index >= 0) {
+          row.classList.add("is-updated");
+          window.setTimeout(() => row.classList.remove("is-updated"), 680);
+        }
+      });
+
+      if (index >= 0) {
+        elements.roundSelect.value = String(index);
+      }
+
+      updateSummary(round);
+      updateControls();
+    }
+
+    function updateControls() {
+      elements.previousButton.disabled = currentRoundIndex <= 0;
+      elements.nextButton.disabled = currentRoundIndex >= database.rounds.length - 1;
+      elements.playButton.textContent = isPlaying ? "\u275A\u275A" : "\u25B6";
+      elements.playButton.title = isPlaying ? "Pause" : "Play";
+      elements.playButton.setAttribute("aria-label", isPlaying ? "Pause" : "Play");
+    }
+
+    function stopPlaying() {
+      isPlaying = false;
+      window.clearTimeout(timer);
+      updateControls();
+    }
+
+    function playNext() {
+      if (!isPlaying) return;
+
+      if (currentRoundIndex >= database.rounds.length - 1) {
+        stopPlaying();
+        return;
+      }
+
+      applyRound(currentRoundIndex + 1);
+      timer = window.setTimeout(playNext, Number(elements.speedControl.value));
+    }
+
+    function startPlaying() {
+      if (isPlaying) return;
+      isPlaying = true;
+      updateControls();
+      timer = window.setTimeout(playNext, currentRoundIndex < 0 ? 180 : Number(elements.speedControl.value));
+    }
+
+    function showMessage(text) {
+      elements.message.textContent = text;
+      elements.message.classList.remove("is-hidden");
+    }
+
+    async function loadDatabase() {
+      const response = await fetch(DATA_URL, { cache: "no-cache" });
+      if (!response.ok) {
+        throw new Error(`Could not load ${DATA_URL}`);
+      }
+      return response.json();
+    }
+
+    async function initialise() {
+      try {
+        database = await loadDatabase();
+        renderRows();
+        renderRoundOptions();
+        applyRound(-1);
+        startPlaying();
+      } catch (error) {
+        console.error(error);
+        showMessage("The season database could not be loaded.");
+      }
+    }
+
+    elements.restartButton.addEventListener("click", () => {
+      stopPlaying();
+      applyRound(-1);
+      startPlaying();
+    });
+
+    elements.previousButton.addEventListener("click", () => {
+      stopPlaying();
+      applyRound(Math.max(0, currentRoundIndex - 1));
+    });
+
+    elements.nextButton.addEventListener("click", () => {
+      stopPlaying();
+      applyRound(Math.min(database.rounds.length - 1, currentRoundIndex + 1));
+    });
+
+    elements.playButton.addEventListener("click", () => {
+      if (isPlaying) {
+        stopPlaying();
+      } else {
+        startPlaying();
+      }
+    });
+
+    elements.roundSelect.addEventListener("change", (event) => {
+      stopPlaying();
+      applyRound(Number(event.target.value));
+    });
+
+    elements.speedControl.addEventListener("input", () => {
+      if (isPlaying) {
+        window.clearTimeout(timer);
+        timer = window.setTimeout(playNext, Number(elements.speedControl.value));
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      applyRound(currentRoundIndex);
+    });
+
+    initialise();
+  </script>
 </body>
 </html>
