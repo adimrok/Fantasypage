@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estates Dream Teams Table 26/27</title>
+  <link rel="icon" href="logo.png">
+  <style>
+    :root {
+      --ink: #15141f;
+      --muted: #6a6575;
+      --panel: #ffffff;
+      --line: #ded9e8;
+      --purple: #37003c;
+      --green: #00ff87;
+      --blue: #04f5ff;
+      --gold: #ffb000;
+      --red: #e02f5f;
+      --bg: #f7f4f8;
+      --row-step: 84px;
+      --row-height: 74px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(55, 0, 60, 0.08), rgba(247, 244, 248, 0) 300px),
+        var(--bg);
+    }
+
+    button,
+    select,
+    input {
+      font: inherit;
+    }
+
+    .shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 44px;
+    }
+
+    .masthead {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 0 22px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 62px;
+      height: 62px;
+      object-fit: contain;
+      flex: 0 0 auto;
+    }
+
+    .brand-kicker {
+      margin: 0 0 3px;
+      color: var(--purple);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.45rem, 2.5vw, 2.45rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .season-badge {
+      justify-self: end;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 40px;
+      padding: 0 14px;
+      border: 1px solid rgba(55, 0, 60, 0.18);
+      border-radius: 8px;
+      color: var(--purple);
+      background: rgba(255, 255, 255, 0.76);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .season-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 0 4px rgba(0, 255, 135, 0.18);
+    }
+
+    .summary-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 4px 0 18px;
+    }
+
+    .summary-item {
+      min-height: 72px;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .summary-label {
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .summary-value {
+      margin: 0;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 1.2rem;
+      font-weight: 850;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 18px 42px rgba(28, 17, 38, 0.08);
+    }
+
+    .button-group {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .icon-button {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--purple);
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .icon-button:hover {
+      border-color: rgba(55, 0, 60, 0.34);
+      background: #faf8fb;
+      transform: translateY(-1px);
+    }
+
+    .icon-button:disabled {
+      cursor: default;
+      opacity: 0.45;
+      transform: none;
+    }
+
+    .icon-button.primary {
+      border-color: var(--purple);
+      background: var(--purple);
+      color: #fff;
+    }
+
+    .round-select {
+      justify-self: start;
+      min-width: 138px;
+      height: 42px;
+      padding: 0 34px 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 750;
+    }
+
+    .speed-control {
+      display: grid;
+      grid-template-columns: auto 140px;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 750;
+    }
+
+    .speed-control input {
+      width: 140px;
+      accent-color: var(--purple);
+    }
+
+    .board-head {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr) 80px 92px 74px;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0 8px;
+      padding: 0 18px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .leaderboard {
+      position: relative;
+      min-height: var(--row-height);
+    }
+
+    .row {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      min-height: var(--row-height);
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr) 80px 92px 74px;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border: 1px solid rgba(222, 217, 232, 0.94);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 10px 28px rgba(28, 17, 38, 0.08);
+      transition: transform 720ms cubic-bezier(0.2, 0.8, 0.2, 1), background 260ms ease, border-color 260ms ease;
+      will-change: transform;
+    }
+
+    .row.is-leader {
+      border-color: rgba(0, 255, 135, 0.72);
+      box-shadow: 0 12px 30px rgba(0, 255, 135, 0.12);
+    }
+
+    .row.is-updated {
+      background: #e9fff5;
+    }
+
+    .position {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--purple);
+      font-weight: 900;
+    }
+
+    .player {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      object-fit: cover;
+      flex: 0 0 auto;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px rgba(55, 0, 60, 0.18);
+      background: #efe9f1;
+    }
+
+    .player-copy {
+      min-width: 0;
+    }
+
+    .player-name {
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 1rem;
+      font-weight: 850;
+    }
+
+    .team-name {
+      margin: 2px 0 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--muted);
+      font-size: 0.83rem;
+      font-weight: 600;
+    }
+
+    .movement {
+      justify-self: start;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 58px;
+      min-height: 30px;
+      padding: 0 9px;
+      border-radius: 999px;
+      background: #f0edf4;
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    .movement.up {
+      background: rgba(0, 255, 135, 0.18);
+      color: #007a42;
+    }
+
+    .movement.down {
+      background: rgba(224, 47, 95, 0.12);
+      color: var(--red);
+    }
+
+    .gw-points,
+    .total-points {
+      justify-self: end;
+      font-variant-numeric: tabular-nums;
+      font-weight: 900;
+    }
+
+    .gw-points {
+      color: var(--purple);
+    }
+
+    .total-points {
+      font-size: 1.18rem;
+    }
+
+    .message {
+      margin: 18px 0 0;
+      padding: 14px 16px;
+      border: 1px solid rgba(224, 47, 95, 0.22);
+      border-radius: 8px;
+      background: rgba(224, 47, 95, 0.08);
+      color: #7d1634;
+      font-weight: 700;
+    }
+
+    .is-hidden {
+      display: none;
+    }
+
+    @media (max-width: 780px) {
+      :root {
+        --row-step: 96px;
+        --row-height: 86px;
+      }
+
+      .shell {
+        width: min(100% - 20px, 1120px);
+        padding-top: 14px;
+      }
+
+      .masthead {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .season-badge {
+        justify-self: start;
+      }
+
+      .summary-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .round-select,
+      .speed-control {
+        justify-self: stretch;
+      }
+
+      .speed-control {
+        grid-template-columns: auto 1fr;
+      }
+
+      .speed-control input {
+        width: 100%;
+      }
+
+      .board-head {
+        grid-template-columns: 42px minmax(0, 1fr) 60px 62px;
+        padding: 0 10px;
+      }
+
+      .board-head span:nth-child(3) {
+        display: none;
+      }
+
+      .row {
+        grid-template-columns: 42px minmax(0, 1fr) 60px 62px;
+        padding: 10px;
+      }
+
+      .movement {
+        display: none;
+      }
+
+      .avatar {
+        width: 42px;
+        height: 42px;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .summary-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .brand-logo {
+        width: 54px;
+        height: 54px;
+      }
+
+      .button-group {
+        justify-content: space-between;
+      }
+
+      .icon-button {
+        width: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="masthead">
+      <div class="brand-lockup">
+        <img class="brand-logo" src="logo.png" alt="Estates Dream Teams logo">
+        <div>
+          <p class="brand-kicker">Fantasy Premier League</p>
+          <h1>Estates Dream Teams Table</h1>
+        </div>
+      </div>
+      <div></div>
+      <div class="season-badge"><span class="season-dot"></span><span id="seasonLabel">2026/27</span></div>
+    </header>
+
+    <section class="summary-strip" aria-label="Round summary">
+      <div class="summary-item">
+        <p class="summary-label">Round</p>
+        <p class="summary-value" id="roundLabel">Loading</p>
+      </div>
+      <div class="summary-item">
+        <p class="summary-label">Leader</p>
+        <p class="summary-value" id="leaderLabel">-</p>
+      </div>
+      <div class="summary-item">
+        <p class="summary-label">League GW Points</p>
+        <p class="summary-value" id="roundTotalLabel">-</p>
+      </div>
+      <div class="summary-item">
+        <p class="summary-label">Updated</p>
+        <p class="summary-value" id="updatedLabel">-</p>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="Table controls">
+      <div class="button-group">
+        <button class="icon-button" type="button" id="restartButton" title="Restart" aria-label="Restart">&#8634;</button>
+        <button class="icon-button" type="button" id="previousButton" title="Previous gameweek" aria-label="Previous gameweek">&#8249;</button>
+        <button class="icon-button primary" type="button" id="playButton" title="Play or pause" aria-label="Play or pause">&#9658;</button>
+        <button class="icon-button" type="button" id="nextButton" title="Next gameweek" aria-label="Next gameweek">&#8250;</button>
+      </div>
+
+      <select class="round-select" id="roundSelect" aria-label="Choose gameweek"></select>
+
+      <label class="speed-control">
+        <span>Speed</span>
+        <input id="speedControl" type="range" min="700" max="2600" step="100" value="1500" aria-label="Animation speed">
+      </label>
+    </section>
+
+    <div class="board-head" aria-hidden="true">
+      <span>Pos</span>
+      <span>Player</span>
+      <span>Move</span>
+      <span>GW</span>
+      <span>Total</span>
+    </div>
+
+    <section class="leaderboard" id="leaderboard" aria-label="Animated league table"></section>
+    <div class="message is-hidden" id="message" role="status"></div>
+  </main>
+
+  <script>
+    const DATA_URL = "data/season-2026-27.json";
+
+    const elements = {
+      leaderboard: document.getElementById("leaderboard"),
+      roundLabel: document.getElementById("roundLabel"),
+      leaderLabel: document.getElementById("leaderLabel"),
+      roundTotalLabel: document.getElementById("roundTotalLabel"),
+      updatedLabel: document.getElementById("updatedLabel"),
+      seasonLabel: document.getElementById("seasonLabel"),
+      roundSelect: document.getElementById("roundSelect"),
+      restartButton: document.getElementById("restartButton"),
+      previousButton: document.getElementById("previousButton"),
+      playButton: document.getElementById("playButton"),
+      nextButton: document.getElementById("nextButton"),
+      speedControl: document.getElementById("speedControl"),
+      message: document.getElementById("message")
+    };
+
+    let database;
+    let currentRoundIndex = -1;
+    let timer;
+    let isPlaying = false;
+
+    function getRowStep() {
+      return parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--row-step")) || 84;
+    }
+
+    function formatNumber(value) {
+      return new Intl.NumberFormat("en-GB").format(value || 0);
+    }
+
+    function formatDate(value) {
+      if (!value) return "-";
+      return new Intl.DateTimeFormat("en-GB", {
+        day: "2-digit",
+        month: "short",
+        hour: "2-digit",
+        minute: "2-digit"
+      }).format(new Date(value));
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (character) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      })[character]);
+    }
+
+    function createInitialRound() {
+      return {
+        shortName: "Start",
+        totalRoundPoints: 0,
+        standings: database.players.map((player, index) => ({
+          entry: player.entry,
+          displayName: player.displayName,
+          managerName: player.managerName,
+          teamName: player.teamName,
+          points: 0,
+          total: 0,
+          position: index + 1,
+          previousPosition: index + 1,
+          movement: 0
+        }))
+      };
+    }
+
+    function getPlayer(entry) {
+      return database.players.find((player) => player.entry === entry) || {};
+    }
+
+    function rowTemplate(player) {
+      const avatar = player.avatar || "logo.png";
+
+      return `
+        <article class="row" id="entry-${player.entry}" aria-label="${escapeHtml(player.displayName)}">
+          <div class="position">-</div>
+          <div class="player">
+            <img class="avatar" src="${avatar}" alt="">
+            <div class="player-copy">
+              <p class="player-name">${escapeHtml(player.displayName)}</p>
+              <p class="team-name">${escapeHtml(player.teamName)}</p>
+            </div>
+          </div>
+          <div class="movement">-</div>
+          <div class="gw-points">0</div>
+          <div class="total-points">0</div>
+        </article>
+      `;
+    }
+
+    function renderRows() {
+      elements.leaderboard.innerHTML = database.players.map(rowTemplate).join("");
+      elements.leaderboard.style.height = `${database.players.length * getRowStep()}px`;
+    }
+
+    function renderRoundOptions() {
+      elements.roundSelect.innerHTML = database.rounds
+        .map((round, index) => `<option value="${index}">${round.shortName}</option>`)
+        .join("");
+    }
+
+    function getRoundForDisplay(index) {
+      return index < 0 ? createInitialRound() : database.rounds[index];
+    }
+
+    function movementText(movement) {
+      if (movement > 0) return `\u2191${movement}`;
+      if (movement < 0) return `\u2193${Math.abs(movement)}`;
+      return "\u2194";
+    }
+
+    function updateSummary(round) {
+      const leader = round.standings[0];
+      const leaderProfile = leader ? getPlayer(leader.entry) : null;
+      elements.roundLabel.textContent = currentRoundIndex < 0 ? "Start" : round.shortName;
+      elements.leaderLabel.textContent = leader ? `${leaderProfile.displayName} (${formatNumber(leader.total)})` : "-";
+      elements.roundTotalLabel.textContent = formatNumber(round.totalRoundPoints);
+      elements.updatedLabel.textContent = formatDate(database.generatedAt);
+      elements.seasonLabel.textContent = database.season;
+    }
+
+    function applyRound(index) {
+      currentRoundIndex = index;
+      const round = getRoundForDisplay(index);
+      const rowStep = getRowStep();
+
+      elements.leaderboard.style.height = `${round.standings.length * rowStep}px`;
+
+      round.standings.forEach((player, rowIndex) => {
+        const row = document.getElementById(`entry-${player.entry}`);
+        if (!row) return;
+
+        const previousTotal = Number(row.dataset.total || 0);
+        row.dataset.total = player.total;
+        row.style.transform = `translateY(${rowIndex * rowStep}px)`;
+        row.classList.toggle("is-leader", rowIndex === 0);
+
+        row.querySelector(".position").textContent = player.position;
+        row.querySelector(".gw-points").textContent = formatNumber(player.points);
+        row.querySelector(".total-points").textContent = formatNumber(player.total);
+
+        const movement = row.querySelector(".movement");
+        movement.textContent = movementText(player.movement);
+        movement.classList.toggle("up", player.movement > 0);
+        movement.classList.toggle("down", player.movement < 0);
+
+        if (previousTotal !== player.total && index >= 0) {
+          row.classList.add("is-updated");
+          window.setTimeout(() => row.classList.remove("is-updated"), 680);
+        }
+      });
+
+      if (index >= 0) {
+        elements.roundSelect.value = String(index);
+      }
+
+      updateSummary(round);
+      updateControls();
+    }
+
+    function updateControls() {
+      elements.previousButton.disabled = currentRoundIndex <= 0;
+      elements.nextButton.disabled = currentRoundIndex >= database.rounds.length - 1;
+      elements.playButton.textContent = isPlaying ? "\u275A\u275A" : "\u25B6";
+      elements.playButton.title = isPlaying ? "Pause" : "Play";
+      elements.playButton.setAttribute("aria-label", isPlaying ? "Pause" : "Play");
+    }
+
+    function stopPlaying() {
+      isPlaying = false;
+      window.clearTimeout(timer);
+      updateControls();
+    }
+
+    function playNext() {
+      if (!isPlaying) return;
+
+      if (currentRoundIndex >= database.rounds.length - 1) {
+        stopPlaying();
+        return;
+      }
+
+      applyRound(currentRoundIndex + 1);
+      timer = window.setTimeout(playNext, Number(elements.speedControl.value));
+    }
+
+    function startPlaying() {
+      if (isPlaying) return;
+      isPlaying = true;
+      updateControls();
+      timer = window.setTimeout(playNext, currentRoundIndex < 0 ? 180 : Number(elements.speedControl.value));
+    }
+
+    function showMessage(text) {
+      elements.message.textContent = text;
+      elements.message.classList.remove("is-hidden");
+    }
+
+    async function loadDatabase() {
+      const response = await fetch(DATA_URL, { cache: "no-cache" });
+      if (!response.ok) {
+        throw new Error(`Could not load ${DATA_URL}`);
+      }
+      return response.json();
+    }
+
+    async function initialise() {
+      try {
+        database = await loadDatabase();
+        renderRows();
+        renderRoundOptions();
+        applyRound(-1);
+        startPlaying();
+      } catch (error) {
+        console.error(error);
+        showMessage("The season database could not be loaded.");
+      }
+    }
+
+    elements.restartButton.addEventListener("click", () => {
+      stopPlaying();
+      applyRound(-1);
+      startPlaying();
+    });
+
+    elements.previousButton.addEventListener("click", () => {
+      stopPlaying();
+      applyRound(Math.max(0, currentRoundIndex - 1));
+    });
+
+    elements.nextButton.addEventListener("click", () => {
+      stopPlaying();
+      applyRound(Math.min(database.rounds.length - 1, currentRoundIndex + 1));
+    });
+
+    elements.playButton.addEventListener("click", () => {
+      if (isPlaying) {
+        stopPlaying();
+      } else {
+        startPlaying();
+      }
+    });
+
+    elements.roundSelect.addEventListener("change", (event) => {
+      stopPlaying();
+      applyRound(Number(event.target.value));
+    });
+
+    elements.speedControl.addEventListener("input", () => {
+      if (isPlaying) {
+        window.clearTimeout(timer);
+        timer = window.setTimeout(playNext, Number(elements.speedControl.value));
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (!database) return;
+      applyRound(currentRoundIndex);
+    });
+
+    initialise();
+  </script>
+</body>
+</html>

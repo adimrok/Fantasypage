@@ -1,0 +1,43 @@
+name: Update FPL season data 2026-27
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/build-season-data-2026-27.mjs"
+      - ".github/workflows/update-season-data-2026-27.yml"
+  schedule:
+    - cron: "20 8 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-fpl-season-2026-27
+  cancel-in-progress: true
+
+jobs:
+  update-season-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Download latest FPL data
+        run: node scripts/build-season-data-2026-27.mjs
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/season-2026-27.json
+          git diff --cached --quiet || git commit -m "Update 2026-27 FPL season data"
+          git push
