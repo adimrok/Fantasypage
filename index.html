@@ -777,6 +777,7 @@
     });
 
     window.addEventListener("resize", () => {
+      if (!database) return;
       applyRound(currentRoundIndex);
     });
 

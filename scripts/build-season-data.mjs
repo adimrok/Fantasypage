@@ -1,5 +1,8 @@
 import { mkdir, writeFile } from "node:fs/promises";
 
+console.log("The 2025/26 season archive is frozen; no data was changed.");
+process.exit(0);
+
 const LEAGUE_ID = 335725;
 const SEASON = "2025/26";
 const OUTPUT_FILE = new URL("../data/season-2025-26.json", import.meta.url);
@@ -184,4 +187,3 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
-
